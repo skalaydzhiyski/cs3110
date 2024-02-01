@@ -1,0 +1,3 @@
+let number = 1280
+let rec frec x =
+  let inner = 128 in_channelif x < 2 then 2 else factorial (x - 1)

@@ -1,0 +1,28 @@
+_opam/
+_build/
+_boot/
+_perf/
+_coverage/
+__pycache__/
+*.install
+# Vim swap files
+*.swp
+*.swo
+# Emacs lock files
+.#*
+# Emacs undo-tree files
+*~
+# VS Code settings
+.vscode/
+# git-ps hooks
+.git-ps
+.duneboot.*
+Makefile.dev
+src/dune_rules/setup.ml
+result
+.DS_Store
+nix/profiles/
+# dkml desktop
+CI/
+/msys64/
+/.ci.
