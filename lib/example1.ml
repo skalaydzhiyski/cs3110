@@ -93,3 +93,9 @@ let get_name_from_address_book2 abook =
   match abook with
   | PhysicalAddressBook ab -> (first_or_fail ab).name
   | WebAddressBook ab -> (first_or_fail ab).name
+
+let ab =
+  PhysicalAddressBook
+    [ { name = "gosho"; address = "10 dorey house"; years_lived = 3 }
+    ; { name = "mitko"; address = "357 bolo lane"; years_lived = 2 }
+    ]
