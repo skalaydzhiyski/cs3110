@@ -3,6 +3,8 @@ module T2 = Cs3110.Recursive_datastructures
 module T3 = Cs3110.Higher_order_functions
 module T4 = Cs3110.Modules_basic
 
+(* NOTE: most testing can be done by just loading the lib modules in utop *)
+
 let () =
   print_endline "Run examples from the lectures..";
   let examples =
@@ -25,6 +27,7 @@ let () =
     ; T4.TStack.to_list @@ T4.TStack.push 4 T4.example_stack
       |> List.map Int.to_string
       |> List.fold_left ( ^ ) ""
+      (* TODO: add more examples here *)
     ]
   in
   List.iter print_endline examples

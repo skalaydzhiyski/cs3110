@@ -26,4 +26,65 @@ module TStack = struct
     | Node (h, t) -> h :: to_list t
 end
 
-let example_stack = TStack.Node (1, Node (2, Node (3, Empty)))
+module FastQueue = struct
+  (** This is an efficient implementation using Melville style
+      Example: {front = [1;2;3], back=[5;4]} -> [1;2;3;4;5]
+  *)
+  type 'a queue =
+    { front : 'a list
+    ; back : 'a list
+    }
+
+  let empty = { front = []; back = [] }
+
+  let peek = function
+    | { front = []; _ } -> None
+    | { front = h :: _; _ } -> Some h
+
+  let enqueue x = function
+    | { front = []; _ } -> { front = [ x ]; back = [] }
+    | q -> { q with back = x :: q.back }
+
+  let dequeue = function
+    | { front = []; _ } -> None
+    | { front = _ :: []; back } -> Some { front = List.rev back; back = [] }
+    | { front = _ :: t; back } -> Some { front = t; back }
+end
+
+module ListQueue = struct
+  type 'a queue = 'a list
+
+  exception Empty
+
+  let empty = []
+
+  let peek = function
+    | [] -> None
+    | h :: _ -> Some h
+
+  let enqueue x q = q @ [ x ]
+
+  let dequeue = function
+    | [] -> None
+    | _ :: q -> Some q
+end
+
+(* helpers *)
+let ( >>| ) opt f =
+  match opt with
+  | None -> None
+  | Some x -> Some (f x)
+
+let ( >>= ) opt f =
+  match opt with
+  | None -> None
+  | Some x -> f x
+
+let example_stack = TStack.(empty |> push 3 |> push 2 |> push 1)
+let example_stack_peek = TStack.(empty |> push 2 |> push 1 |> pop |> peek)
+let example_q : int list = ListQueue.(empty |> enqueue 1 |> enqueue 2 |> enqueue 3)
+let example_q' : int list option = ListQueue.(empty |> enqueue 1 |> dequeue >>| enqueue 1)
+
+let example_len_q =
+  ListQueue.(
+    empty |> enqueue 1 |> dequeue >>| enqueue 1 >>= dequeue >>| List.length |> Option.get)
