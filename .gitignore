@@ -26,3 +26,5 @@ nix/profiles/
 CI/
 /msys64/
 /.ci.
+./**/#*
+lib/*#
