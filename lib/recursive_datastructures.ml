@@ -27,6 +27,10 @@ let rec preorder_dfs_lst = function
   | Leaf -> []
   | Node (v, l, r) -> [ v ] @ preorder_dfs_lst l @ preorder_dfs_lst r
 
-let rec tree_map f = function
+let rec map_tree f = function
   | Leaf -> Leaf
-  | Node (v, l, r) -> Node (f v, tree_map f l, tree_map f r)
+  | Node (v, l, r) -> Node (f v, map_tree f l, map_tree f r)
+
+let rec tree_fold f acc = function
+  | Leaf -> acc
+  | Node (v, l, r) -> f v (tree_fold f acc l) (tree_fold f acc r)
