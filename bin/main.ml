@@ -1,2 +1,3 @@
 let () =
-  print_endline "go to the lib directory and load examples from the modules themselves"
+  print_endline "Build done.";
+  print_endline "Use examples from the modules to test."
