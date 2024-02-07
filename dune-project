@@ -19,7 +19,7 @@
  (name cs3110)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune base)
+ (depends ocaml dune core)
  (tags
   (topics "to describe" your project)))
 
