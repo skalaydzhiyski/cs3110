@@ -1,0 +1,5 @@
+
+* Formal Verification
+  the process of verification of program correctness (different than testing !)
+
+# TODO: continue here with more notes.
