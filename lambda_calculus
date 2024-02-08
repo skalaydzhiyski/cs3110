@@ -2,23 +2,42 @@
 id = (\x -> x)
 ex: id 1 = 1
 
-true  = (\x y -> x)
-false = (\x y -> y)
-ex: true 1 0  = 1
-    false 1 0 = 0
+true  = (x y . x)
+false = (x y . y)
+ex:
+    abstract: true 1 0 = 1
+    expanded: (x y . x) 1 0 = 1
 
-if = (\p t f -> p t f)
-ex: if true 1 0 = true 1 0 = 1
-    if false 1 0 = false 1 0 = 0
+    abstract: false 1 0 = 0
+    expanded: (x y . y) 1 0 = 0
 
-(\p t f -> p t f) (\x y -> x) 1 0 => (\x y -> x) 1 0 => 1
+if = (p t f -> p t f)
+ex:
+    abstract: if true 1 0 = true 1 0 = 1
+    expanded: (p t f . p t f) (x y . x) 1 0 => (x y . x) 1 0 => 1
 
-while = (\f -> (\x -> f (x x)) (\x -> f (x x)))
+    abstract: if false 1 0 = false 1 0 = 0
+    expanded: (p t f . p t f) (x y . y) 1 0 => (x y . y) 1 0 => 0
 
-while g
-   => (\x -> g (x x)) (\x -> g (x x))
-   => g ((\x -> g (x x)) (\x -> g (x x)))
-   => g (g (\x -> g (x x)) (\x -> g (x x)))
-   => g (g (g (\x -> g (x x)) (\x -> g (x x))))
-   => g (g (g (g (\x -> g (x x)) (\x -> g (x x)))))
-   => g (g (g ... inf
+equal = (x y . ((x true) true) ((x false) false))
+ex:
+    abstract: equal true false
+    expanded: (x y . x (x y . x) (x y . y))
+
+succ = (n . (f x . f (n f x)))
+zero = (x . x)
+one = succ zero
+two = succ one
+...
+
+rec = (f . (x . f (x x)) (x . f (x x)))
+ex:
+      abstract: rec g
+      expanded:
+          (f . (x . f (x x)) (x . f (x x))) g
+       	  -> ((x . g (x x)) (x . g (x x)))
+       	  -> g (((x . g (x x)) (x . g (x x))))
+       	  -> g (g (((x . g (x x)) (x . g (x x)))))
+       	  -> g (g (g (((x . g (x x)) (x . g (x x))))))
+	  -> ...
+	  -> inf

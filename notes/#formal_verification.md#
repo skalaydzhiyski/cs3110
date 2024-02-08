@@ -99,7 +99,7 @@ let rec plus l r =
 
 **Theorem**:
 ```
-plus
+plus S 
 ```
 
 **Proof**:
