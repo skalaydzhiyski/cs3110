@@ -1,0 +1,24 @@
+
+id = (\x -> x)
+ex: id 1 = 1
+
+true  = (\x y -> x)
+false = (\x y -> y)
+ex: true 1 0  = 1
+    false 1 0 = 0
+
+if = (\p t f -> p t f)
+ex: if true 1 0 = true 1 0 = 1
+    if false 1 0 = false 1 0 = 0
+
+(\p t f -> p t f) (\x y -> x) 1 0 => (\x y -> x) 1 0 => 1
+
+while = (\f -> (\x -> f (x x)) (\x -> f (x x)))
+
+while g
+   => (\x -> g (x x)) (\x -> g (x x))
+   => g ((\x -> g (x x)) (\x -> g (x x)))
+   => g (g (\x -> g (x x)) (\x -> g (x x)))
+   => g (g (g (\x -> g (x x)) (\x -> g (x x))))
+   => g (g (g (g (\x -> g (x x)) (\x -> g (x x)))))
+   => g (g (g ... inf
