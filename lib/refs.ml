@@ -15,6 +15,7 @@ let test () =
   (* this modifies the underlying reference contents *)
   y := 1;
   print_endline @@ Format.sprintf "x = %d ; y = %d" !x !y;
+  (* structural vs physical equality *)
   print_endline @@ Format.sprintf "x = y = %b" (x = y);
   print_endline @@ Format.sprintf "x == y = %b" (x == y);
   print_endline @@ Format.sprintf "x <> y = %b" (x <> y);
