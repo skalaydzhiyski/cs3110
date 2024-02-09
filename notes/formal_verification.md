@@ -99,14 +99,20 @@ let rec plus l r =
 
 **Theorem**:
 ```
-plus
+plus (S k) Z = S k
 ```
 
 **Proof**:
 *base case*:
 ```
+  plus Z Z
+= Z
+
 ```
 *inductive case*:
 ```
-TODO: continue here
+  plus (S k) Z
+= S (plus k Z)
+= S k
 ```
+*QED*
