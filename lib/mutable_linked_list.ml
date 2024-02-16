@@ -7,7 +7,7 @@ type 'a node =
 
 let make_node v = { value = v; next = None }
 
-let rec insert_front v current =
+let insert_front v current =
   let node = make_node v in
   node.next <- Some current;
   node
