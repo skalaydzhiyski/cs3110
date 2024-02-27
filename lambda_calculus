@@ -28,7 +28,9 @@ ex:
 equal = (x y . ((x true) true) ((x false) false))
 ex:
     abstract: equal true false
-    expanded: (x y . x (x y . x) (x y . y))
+    expanded: # TODO: write the expansion
+
+-----------------------------------------------------------------------
 
 succ = (n . (f x . f (n f x)))
 zero = (x . x)
