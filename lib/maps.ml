@@ -1,4 +1,3 @@
-(** TODO: Continue here whne you're coming back to the course *)
 module type Map = sig
   (** [t] is the type of map that binds values of type [a] to values of type [b] *)
   type ('a, 'b) t
